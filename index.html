@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Kyle集</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <link href="https://cdn.bootcss.com/vonic/2.0.0-rc.1/vonic.min.css" rel="stylesheet">
+
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script> 
+    <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"></script> -->
+
+    <script src="https://cdn.bootcss.com/vonic/2.0.0-rc.1/vonic.min.js"></script>
+  </head>
+  
+
+   <body>
+    <!-- mount point -->
+    <von-app></von-app>
+
+    <style>
+      h2 {
+        font-family: Candara,Calibri,Segoe,Segoe UI,Optima,Arial,sans-serif;
+        color: #888;
+      }
+      .page.has-navbar .page-content {
+        padding-top: 100px;
+      }
+    </style>
+
+    <!-- templates -->
+    <script type="x-template" id="index">
+      <div class="page has-navbar" v-nav="{ title: 'Home' }">
+        <div class="page-content text-center">
+          <h2 class="padding" v-text="msg"></h2>
+          <router-link class="button button-assertive" to="/about">
+            <i class="ion-information-circled"></i> About
+          </router-link>
+        </div>
+      </div>
+    </script>
+
+    <script type="x-template" id="about">
+      <div class="page has-navbar" v-nav="{ title: 'About', showBackButton: true, onBackButtonClick: back }">
+        <div class="page-content text-center">
+          <h2 class="padding">Nothing here.</h2>
+        </div>
+      </div>
+    </script>
+
+    <script>
+      // Page Components
+      var Index = {
+        template: '#index',
+        data() {
+          return {
+            msg: 'Hello! Vonic.'  
+          }
+        }
+      }
+      var About = {
+        template: '#about',
+        methods: {
+          back() {
+            $router.back('/')
+          }
+        }
+      }
+      // Routes
+      var routes = [
+        { path: '/', component: Index },
+        { path: '/about', component: About }
+      ]
+      // Start up
+      Vue.use(Vonic.app, {
+        routes: routes
+      })
+    </script>
+  </body>
+
+
+</html>
