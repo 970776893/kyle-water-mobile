@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>秒杀</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <link href="https://cdn.bootcss.com/vonic/2.0.0-rc.1/vonic.min.css" rel="stylesheet">
+    <link href="../mobile.css" rel="stylesheet">
+
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script> 
+    <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"></script> -->
+
+    <script src="https://cdn.bootcss.com/vonic/2.0.0-rc.1/vonic.min.js"></script>
+  </head>
+  
+
+   <body>
+    <!-- mount point -->
+    <von-app></von-app>
+
+    <style>
+      .card-wapper {
+        width: 100%;
+      }
+
+      .card {
+        margin: 1px;
+        background-color: white;
+        box-sizing: border-box;
+        height: 110px;
+      }
+
+      .card .left {
+        width: 25%;
+        margin-top: 10px;
+        padding-left: 5px;
+        border-right: 1px solid #e8e7e7;
+        display: inline-block;
+      }
+      .card .left .icon {
+        width: 80px;
+        height: 80px;
+      }
+      .card .right {
+        width: 73%;
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      .card a {
+        text-decoration:none;
+      }
+      .card .title {
+        color: black;
+        text-align: left;
+        font-size: 18px;
+        line-height: 18px;
+        height: 18px;
+        margin: 0.25rem;
+      }
+
+      .card .desc {
+        text-align: left;
+        font-size: 0.625rem;
+        line-height: 0.875rem;
+        max-height: 1.75rem;
+        margin: 0 0.25rem;
+        color: #a0a0a0;
+      }
+
+      .card .time {
+        color: black;
+        font-size: 0.815rem;
+      }
+
+      .card .price {
+        text-align: left;
+        color: #d0a752;
+        font-size: 0.875rem;
+        line-height: 0.875rem;
+        margin: 0.25rem;
+      }
+
+      .card .price .old {
+        padding-left: 0.25rem;
+        text-decoration: line-through;
+        color: #cc1515;
+        font-size: 0.625rem;
+      }
+      .active .tag-status {
+          color: #EA5A49;
+          border: 1px solid #EA5A49;
+      }
+
+      .active .tag-validate {
+          color: #44CC00;
+          border: 1px solid #44CC00;
+      }
+
+      .swiper {
+        width: 100%;
+        height: 250px !important;
+      }
+      .swiper .item {
+        margin: 0px auto;
+        text-align: center;
+      }
+      .swiper .item img {
+        height: 250px;
+      }
+    </style>
+
+    <!-- templates -->
+    <script type="x-template" id="index">
+      <div class="page has-navbar" v-nav="{ title: title }">
+        <div class="page-content ">
+          <button-bar theme="assertive" :tab-items="promotions" :tab-index="promotionIndex" :on-tab-click="changeTab" />
+          
+          <div class="card-wapper">
+            <div class="card" v-for="activity in activityList">
+              <router-link :class='activity.status === 0 ? "active" : ""' to="/detail">
+                <div class="left">
+                  <img class="icon" :src="activity.img" />
+                </div>
+                <div class="right">
+                  <div class="title">{{activity.title}}<div class="tag tag-status">{{activity.status | status}}</div></div>
+                  <div class="desc">{{activity.desc}}</div>
+                  <div class="price">{{activity.price | money}}<span class="old">{{activity.formerPrice | money}}</span></div>
+                  <div class="tag tag-validate">有效期:{{activity.startTime}}到{{activity.endTime}}</div>
+                </div>
+              </router-link>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+        <!-- templates -->
+    <script type="x-template" id="detail">
+      <div class="page has-navbar" v-nav="{ title: title , showBackButton: true, onBackButtonClick: back }">
+          <div class="page-content ">
+              <swiper class="swiper" direction="horizontal" pager-color="#ea5a49" pager-bg-color="#e5e4e3" hide-pager="false">
+                  <swiper-item class="item">
+                      <img src="/img/xiaowangzi.png" />
+                  </swiper-item>
+                  <swiper-item class="item">
+                      <img src="/img/xiaowangzi.png" />
+                  </swiper-item>
+                  <swiper-item class="item">
+                      <img src="/img/xiaowangzi.png" />
+                  </swiper-item>
+              </swiper>
+              <div>
+                aa
+              </div>
+          </div>
+      </div>
+    </script>
+
+
+    <script>
+      // Page Components
+      var Index = {
+        template: '#index',
+        data() {
+          return {
+            title: '极拍' ,
+            promotions: ["正在进行中", "往期秒杀"],
+            promotionIndex: 0 ,
+            activityList: [
+              {
+                id:1,
+                title: '小王子',
+                img: '/img/xiaowangzi.png',
+                desc: '物舍双喜瓶，陪伴于你左右的水瓶',
+                status: 0,
+                price: '198.99',
+                formerPrice: '399.00',
+                startTime: '2018-07-02 00:00:00',
+                endTime: '2018-08-02 24:00:00'
+              }
+            ]
+
+          }
+        },
+        methods: {
+          changeTab : function(index) {
+            this.promotionIndex = index
+          }
+        }
+      }
+
+      // Page Components
+      var Detail = {
+        template: '#detail',
+        data() {
+          return {
+            title: '极拍' ,
+            promotions: ["正在进行中", "往期秒杀"],
+            promotionIndex: 0 ,
+            activityList: [
+              {
+                id:1,
+                title: '小王子',
+                img: '/img/xiaowangzi.png',
+                desc: '物舍双喜瓶，陪伴于你左右的水瓶',
+                status: 0,
+                price: '198.99',
+                formerPrice: '399.00',
+                startTime: '2018-07-02 00:00:00',
+                endTime: '2018-08-02 24:00:00'
+              },
+              {
+                id:1,
+                title: '小王子',
+                img: '/img/xiaowangzi.png',
+                desc: '物舍双喜瓶，陪伴于你左右的水瓶',
+                status: 1,
+                price: '198.99',
+                formerPrice: '399.00',
+                startTime: '2018-07-02 00:00:00',
+                endTime: '2018-08-02 24:00:00'
+              }
+            ]
+
+          }
+        },
+        methods: {
+          changeTab : function(index) {
+            this.promotionIndex = index
+          },
+          back() {
+            $router.back('/')
+          }
+        }
+      }
+      // Routes
+      var routes = [
+        { path: '/', component: Index },
+
+        { path: '/detail', component: Detail }
+      ]
+
+      // filter
+      Vue.filter('money', function (value) {
+        const number = Number(value)
+        return '￥'  + number.toFixed(2)
+      })
+
+            // filter
+      Vue.filter('status', function (value) {
+        const number = Number(value)
+        if (number === 0) {
+          return '进行中'
+        } else if(number ===1) {
+          return '未开始'
+        } else if( number === 2) {
+          return '已结束'
+        } else {
+          return ''
+        }
+      })
+
+
+      // Start up
+      Vue.use(Vonic.app, {
+        routes: routes
+      })
+    </script>
+</body>
+</html>
