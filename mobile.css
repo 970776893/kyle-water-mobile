@@ -6,22 +6,87 @@ body {
 }
 
 .tag {
-    font-size: 8px;
-    line-height: 10px;
-    border-radius: 4px;
-    padding: 2px 8px;
-    border: 1px solid #B5B5B5;
-    color: #B5B5B5;
-    width: auto;
-    display: inline-block;
+  font-size: 8px;
+  line-height: 10px;
+  border-radius: 4px;
+  padding: 2px 8px;
+  border: 1px solid #B5B5B5;
+  color: #B5B5B5;
+  width: auto;
+  display: inline-block;
 }
 
 .tag.tag-danger {
-    color: #EA5A49;
-    border: 1px solid #EA5A49;
+  color: #EA5A49;
+  border: 1px solid #EA5A49;
 }
 
 .tag.tag-primary {
-    color: #44CC00;
-    border: 1px solid #44CC00;
+  color: #44CC00;
+  border: 1px solid #44CC00;
+}
+
+.time-block {
+  display: inline-block;
+  color: #e34937;
+  height: 1.125rem;
+  vertical-align: middle;
+}
+
+.time-block li {
+  display: inline-block;
+  background-color: #f9dbd8;
+  padding: 0.125rem;
+  font-size: 0.815rem;
+  line-height: 0.815rem;
+  border-radius: 0.125rem;
+}
+
+.time-block .colon {
+  background-color: transparent;
+  padding: 0.125rem 0rem;
+}
+
+.list-point:before {
+  display: inline-block;
+  width: .5rem;
+  height: .5rem;
+  background-color: #D7AA4B;
+  top: .5rem;
+  content: '';
+  border-radius: .5rem;
+  margin-right: .5rem;
+}
+.bottom-tip {
+    background-color: transparent;
+    height: 2rem;
+    line-height: 1rem;
+    font-size: .815rem;
+    padding: .3rem 0 .5rem 0;
+    padding-bottom: calc(1.466667rem + constant(safe-area-inset-bottom));
+    padding-bottom: calc(1.466667rem + env(safe-area-inset-bottom));
+    color: #999;
+    text-align: center;
+}
+
+.page.has-bottombar .page-content {
+    padding-bottom: 44px;
+}
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 44px;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    background-color: #fff;
+    z-index: 999;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
