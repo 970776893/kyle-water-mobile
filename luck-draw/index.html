@@ -1,136 +1,149 @@
 <!DOCTYPE html>
 <html>
-  <head>
 
+<head>
     <title>秒杀</title>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
     <link href="https://cdn.bootcss.com/vonic/2.0.0-rc.1/vonic.min.css" rel="stylesheet">
     <link href="../mobile.css" rel="stylesheet">
 
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
-    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script> 
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
     <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"></script>
     <!-- <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"></script> -->
-
     <script src="https://cdn.bootcss.com/vonic/2.0.0-rc.1/vonic.min.js"></script>
+</head>
 
-  </head>
-  
-
-   <body>
+<body>
     <!-- mount point -->
     <von-app></von-app>
-
     <style>
-      .card-wapper {
+    .card-wapper {
         width: 100%;
-      }
-      .card {
+    }
+
+    .card {
         margin: 1px;
         background-color: white;
         box-sizing: border-box;
         height: 110px;
-      }
-      .card .left {
+    }
+
+    .card .left {
         width: 25%;
         margin-top: 10px;
         padding-left: 5px;
         border-right: 1px solid #e8e7e7;
         display: inline-block;
-      }
-      .card .left .icon {
+    }
+
+    .card .left .icon {
         width: 80px;
         height: 80px;
-      }
-      .card .right {
+    }
+
+    .card .right {
         width: 73%;
         display: inline-block;
         vertical-align: top;
-      }
-      .card a {
-        text-decoration:none;
-      }
-      .card .title {
+    }
+
+    .card a {
+        text-decoration: none;
+    }
+
+    .card .title {
         color: black;
         text-align: left;
         font-size: 18px;
         line-height: 18px;
         height: 18px;
         margin: 0.25rem;
-      }
-      .card .sub-title {
+    }
+
+    .card .sub-title {
         text-align: left;
         font-size: 0.625rem;
         line-height: 0.875rem;
         max-height: 1.75rem;
         margin: 0 0.25rem;
         color: #a0a0a0;
-      }
-      .card .time {
+    }
+
+    .card .time {
         color: black;
         font-size: 0.815rem;
-      }
-      .card .price {
+    }
+
+    .card .price {
         text-align: left;
         color: #d0a752;
         font-size: 0.875rem;
         line-height: 0.875rem;
         margin: 0.25rem;
-      }
-      .card .price .old {
+    }
+
+    .card .price .old {
         padding-left: 0.25rem;
         text-decoration: line-through;
         color: #cc1515;
         font-size: 0.625rem;
-      }
+    }
 
-      .active .tag-status {
-          color: #EA5A49;
-          border: 1px solid #EA5A49;
-      }
-      .active .tag-validate {
-          color: #44CC00;
-          border: 1px solid #44CC00;
-      }
+    .active .tag-status {
+        color: #EA5A49;
+        border: 1px solid #EA5A49;
+    }
 
-      .swiper {
+    .active .tag-validate {
+        color: #44CC00;
+        border: 1px solid #44CC00;
+    }
+
+    .swiper {
         width: 100%;
         height: 300px !important;
-      }
-      .swiper .item {
+    }
+
+    .swiper .item {
         margin: 0px auto;
         text-align: center;
-      }
-      .swiper .item img {
-        height: 300px;
-      }
+    }
 
-      .primary-info {
+    .swiper .item img {
+        height: 300px;
+    }
+
+    .primary-info {
         height: 4rem;
-      }
-      .primary-info .ware {
+    }
+
+    .primary-info .ware {
         float: left;
         height: 4rem;
         width: 67%;
         color: white;
         padding-left: 15px;
         background-color: #debc73;
-      }
-      .primary-info .ware .main {
+    }
+
+    .primary-info .ware .main {
         padding-top: 0.5rem;
         font-size: 1.5rem;
         line-height: 1.5rem;
         height: 2rem;
-      }
-      .primary-info .ware .sub{
+    }
+
+    .primary-info .ware .sub {
         font-size: 0.815rem;
         height: 1.5rem;
         line-height: 1.5rem;
-      }
-      .primary-info .leave {
+    }
+
+    .primary-info .leave {
         width: 33%;
         height: 4rem;
         font-size: 0.815rem;
@@ -139,59 +152,69 @@
         float: left;
         background-color: #FFF2D7;
         padding-top: 1rem;
-      }
-      .primary-info .leave .main{
+    }
+
+    .primary-info .leave .main {
         padding-bottom: 2px;
         color: #E34937;
-      }
-      .primary-info .leave .sub{
-        padding-top: 2px;
-      }
+    }
 
-      .brief-info {
+    .primary-info .leave .sub {
+        padding-top: 2px;
+    }
+
+    .brief-info {
         padding-left: 1rem;
         background-color: white;
-      }
-      .brief-info .price{
+    }
+
+    .brief-info .price {
         padding-top: 1rem;
         font-size: 1.25rem;
         color: red;
-      }
-      .brief-info .price .old{
+    }
+
+    .brief-info .price .old {
         text-decoration: line-through;
         color: #B5B5B5;
         font-size: 0.815rem;
-      }
-      .brief-info .title{
+    }
+
+    .brief-info .title {
         padding-top: 0.815rem;
         font-size: 1rem;
-      }
-      .brief-info .sub-title {
+    }
+
+    .brief-info .sub-title {
         padding-top: 0.25rem;
         font-size: 0.625rem;
         color: #a0a0a0;
-      }
-      .brief-info .strong {
+    }
+
+    .brief-info .strong {
         padding-top: 0.815rem;
-      }
-      .brief-info .strong span {
+    }
+
+    .brief-info .strong span {
         font-size: 0.815rem;
         color: #666;
-      }
+    }
 
-      .desc-info {
+    .desc-info {
         margin-top: 1rem;
         padding-left: 1rem;
         background-color: white;
-      }
-      .desc-info .title{
+    }
+
+    .desc-info .title {
         margin-top: 1rem;
         background-color: white;
         height: 2rem;
         font-size: 1rem;
         line-height: 2rem;
-      }
-      .desc-info .title span:before{
+    }
+
+    .desc-info .title span:before {
         display: inline-block;
         width: .5rem;
         height: 1.5rem;
@@ -201,156 +224,163 @@
         border-radius: .5rem;
         margin-right: .5rem;
         vertical-align: middle;
-      }
-      .desc-info .desc {
+    }
+
+    .desc-info .desc {
         padding-right: 1rem;
         text-align: center;
-      }
-      .desc-info .desc img {
+    }
+
+    .desc-info .desc img {
         max-width: 100%;
         padding: 0px;
         display: inline-block;
-      }
+    }
 
-      .bottom-bar button {
+    .bottom-bar button {
         width: 100%;
         border-radius: 0;
-      }
+    }
 
-      .bottom-bar .join {
+    .bottom-bar .join {
         width: 70%;
-      }
-      .bottom-bar .join-history {
+    }
+
+    .bottom-bar .join-history {
         width: 30%
-      }
-      .join-code {
-          margin-right: 1rem;
-          color: white;
-          background-color: #FFBD17;
-          padding: 0.125rem;
-          border-radius: 0.24rem;
-      }
-      .history-list {
+    }
+
+    .join-code {
+        margin-right: 1rem;
+        color: white;
+        background-color: #FFBD17;
+        padding: 0.125rem;
+        border-radius: 0.24rem;
+    }
+
+    .history-list {
         margin-bottom: 0px;
-      }
-      .history-list .icon {
+    }
+
+    .history-list .icon {
         color: #EA5A49;
-      }
-
+    }
     </style>
-
     <!-- templates -->
     <script type="x-template" id="index">
-      <div class="page has-navbar" v-nav="{ title: title }">
-        <div class="page-content ">
-          <button-bar style="padding: 0px 5px;" theme="assertive" :tab-items="promotions" :tab-index="promotionIndex" :on-tab-click="changeTab" />
-          
-          <div class="card-wapper">
-            <div class="card" v-for="activity in activityList">
-              <router-link :class='activity.status === 0 ? "active" : ""' :to='{ path:"/detail", query: { id: activity.id } }'>
-                <div class="left">
-                  <img class="icon" :src="activity.img" />
+        <div class="page has-navbar" v-nav="{ title: title }">
+            <div class="page-content ">
+                <button-bar style="padding: 0px 5px;" theme="assertive" :tab-items="promotions" :tab-index="promotionIndex" :on-tab-click="changeTab" />
+                <div class="card-wapper">
+                    <div class="card" v-for="activity in activityList">
+                        <router-link :class='activity.status === 0 ? "active" : ""' :to='{ path:"/detail", query: { id: activity.id } }'>
+                            <div class="left">
+                                <img class="icon" :src="activity.img" />
+                            </div>
+                            <div class="right">
+                                <div class="title">{{activity.title}}
+                                    <div class="tag tag-status">{{activity.status | status}}</div>
+                                </div>
+                                <div class="sub-title">{{activity.subTitle}}</div>
+                                <div class="price">{{activity.price | money}}<span class="old">{{activity.formerPrice | money}}</span></div>
+                                <div class="tag tag-validate">有效期:{{activity.startTime}}到{{activity.endTime}}</div>
+                            </div>
+                        </router-link>
+                    </div>
                 </div>
-                <div class="right">
-                  <div class="title">{{activity.title}}<div class="tag tag-status">{{activity.status | status}}</div></div>
-                  <div class="sub-title">{{activity.subTitle}}</div>
-                  <div class="price">{{activity.price | money}}<span class="old">{{activity.formerPrice | money}}</span></div>
-                  <div class="tag tag-validate">有效期:{{activity.startTime}}到{{activity.endTime}}</div>
-                </div>
-              </router-link>
             </div>
-          </div>
-          </div>
         </div>
-      </div>
+        </div>
     </script>
-
     <!-- templates -->
     <script type="x-template" id="detail">
-      <div class="page has-bottombar has-navbar" v-nav="{ title: title , showBackButton: true, onBackButtonClick: back }">
-          <div class="page-content ">
-              <swiper class="swiper" direction="horizontal" pager-color="#ea5a49" pager-bg-color="#e5e4e3" hide-pager="false">
-                  <swiper-item class="item" v-for="img in detail.swiperImgs">
-                      <img :src="img" />
-                  </swiper-item>
-              </swiper>
-
-              <div class="primary-info">
-                <div class="ware">
-                  <div class="main">限时抢购中</div>
-                  <div class="sub">仅剩{{detail.stock}}件</div>
+        <div class="page has-bottombar has-navbar" v-nav="{ title: title , showBackButton: true, onBackButtonClick: back }">
+            <div class="page-content ">
+                <swiper class="swiper" direction="horizontal" pager-color="#ea5a49" pager-bg-color="#e5e4e3" hide-pager="false">
+                    <swiper-item class="item" v-for="img in detail.swiperImgs">
+                        <img :src="img" />
+                    </swiper-item>
+                </swiper>
+                <div class="primary-info">
+                    <div class="ware">
+                        <div class="main">限时抢购中</div>
+                        <div class="sub">仅剩{{detail.stock}}件</div>
+                    </div>
+                    <div class="leave">
+                        <div class="main">距结束剩余</div>
+                        <div class="sub">
+                            <ul class="time-block">
+                                <li>07</li>
+                                <li class="colon">:</li>
+                                <li>11</li>
+                                <li class="colon">:</li>
+                                <li>12</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="leave">
-                  <div class="main">距结束剩余</div>
-                  <div class="sub">
-                    <ul class="time-block">
-                      <li>07</li>
-                      <li class="colon">:</li>
-                      <li>11</li>
-                      <li class="colon">:</li>
-                      <li>12</li>
-                    </ul>
-                  </div>
+                <div class="brief-info">
+                    <div class="price">{{detail.price|money}} <span class="old">{{detail.oldPrice|money}}</span></div>
+                    <div class="title">{{detail.title}}</div>
+                    <div class="sub-title">{{detail.subTitle}}</div>
+                    <div class="strong list-point"><span>包邮</span></div>
                 </div>
-              </div>
-
-              <div class="brief-info">
-                <div class="price">{{detail.price|money}} <span class="old">{{detail.oldPrice|money}}</span></div>
-                <div class="title">{{detail.title}}</div>
-                <div class="sub-title">{{detail.subTitle}}</div>
-                <div class="strong list-point"><span>包邮</span></div>
-              </div>
-
-              <div class="desc-info">
-                <div class="title"><span>图文详情</span></div>
-                <div class="desc">
-                  <img :src="img" v-for="img in detail.descImgs"/>
+                <div class="desc-info">
+                    <div class="title"><span>图文详情</span></div>
+                    <div class="desc">
+                        <img :src="img" v-for="img in detail.descImgs" />
+                    </div>
                 </div>
-              </div>
-              <div class="bottom-tip">
-                已经到底了~
-              </div> 
-
-
-              <div class="bottom-bar">
-                 <div class="join-history">  
-                  <button class="md-button button button-dark" @click="joinHistory()">
-                    参与人
-                  </button>
+                <div class="bottom-tip">
+                    已经到底了~
                 </div>
-                <div class="join">  
-                  <button class="md-button button button-assertive" @click="joinIn()">
-                    立刻参与
-                  </button>
+                <div class="bottom-bar">
+                    <div class="join-history">
+                        <button class="md-button button button-dark" @click="joinHistory()">
+                            参与人
+                        </button>
+                    </div>
+                    <div class="join">
+                        <button class="md-button button button-assertive" @click="joinIn()">
+                            立刻参与
+                        </button>
+                    </div>
                 </div>
-              </div>
-          </div>
-      </div>
+            </div>
+        </div>
     </script>
     <!-- templates -->
     <script type="x-template" id="history">
-      <div class="page has-navbar" v-nav="{ title: title , showBackButton: true, onBackButtonClick: back }">
-        <div>
-          <scroll class="page-content" :on-refresh="onRefresh" :on-infinite="onInfinite">
-          <div class="item item-divider">
-            参与历史
-          </div>
-          <list class="history-list">
-            <item v-for="(item, index) in items" class="item-icon-left">
-            <i class="icon ion-trophy dark" v-if="item.level > 0"></i>
-            {{ item.name }} 
-            <div class="tag tag-danger" v-if="item.level > 0">{{item.level | level}}</div> 
-            <span class="item-note" style="font-size: 0.625rem;"><span class="join-code">{{item.joinCode}}</span>{{item.time}}</span>
-            </item>
-          </list>
-          <div v-if="loadDone" slot="infinite" class="text-center">没有更多数据</div>
-          </scroll>
+        <div class="page has-navbar" v-nav="{ title: title , showBackButton: true, onBackButtonClick: back }">
+            <div>
+                <scroll class="page-content" :on-refresh="onRefresh" :on-infinite="onInfinite">
+                    <div class="item item-divider">
+                        参与历史
+                    </div>
+                    <list class="history-list">
+                        <item v-for="(item, index) in items" class="item-icon-left">
+                            <i class="icon ion-trophy dark" v-if="item.level > 0"></i> {{ item.name }}
+                            <div class="tag tag-danger" v-if="item.level > 0">{{item.level | level}}</div>
+                            <span class="item-note" style="font-size: 0.625rem;"><span class="join-code">{{item.joinCode}}</span>{{item.time}}</span>
+                        </item>
+                    </list>
+                    <div v-if="loadDone" slot="infinite" class="text-center">没有更多数据</div>
+                </scroll>
+            </div>
         </div>
-      </div>
     </script>
 
     <script src="./index.js"></script>
+    <script src="../common/base.js"></script>
+    <script src="../common/login.js"></script>
 
-   
+    <script type="text/javascript">
+      // Start up
+      routes = drawRoutes.concat(loginRouter)
+      Vue.use(Vonic.app, {
+          routes: routes
+      })
+    </script>
 </body>
+
 </html>

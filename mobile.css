@@ -90,3 +90,21 @@ body {
     -ms-flex-pack: center;
     justify-content: center;
 }
+
+
+.login {
+  padding: 10px 5px;
+  text-align: center;
+}
+.login .logo {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  width: 80px;
+  height: 80px;
+}
+
+.login .button {
+  margin-top: 22px;
+  border-radius: 22px;
+}

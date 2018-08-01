@@ -108,8 +108,6 @@ var Detail = {
             $router.back('/')
         },
         joinIn() {
-            debugger
-            console.log($router)
         },
         joinHistory() {
             $router.push({path: '/history', query:{ id: this.$route.query.id}})
@@ -213,12 +211,8 @@ Vue.filter('level', function(value) {
 })
 
 // Routes
-var routes = [
+const drawRoutes = [
     { path: '/', component: Index },
     { path: '/detail', component: Detail },
     { path: '/history', component: History }
 ]
-// Start up
-Vue.use(Vonic.app, {
-    routes: routes
-})
